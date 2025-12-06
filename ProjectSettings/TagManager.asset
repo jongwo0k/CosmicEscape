@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Monster
+  - Bullet
+  - Ground
+  - Missile
+  - Spike
   layers:
   - Default
   - TransparentFX
