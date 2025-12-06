@@ -1,33 +1,236 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: E:/Unity/FN Project/Packages/manifest.json
+    m_FilePath: E:/Unity/FN_Project_Unity/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638996441347752642
-    m_Hash: 314904612
+      ticks: 639006414674387567
+    m_Hash: 3211231498
   m_LockFileStatus:
-    m_FilePath: E:/Unity/FN Project/Packages/packages-lock.json
+    m_FilePath: E:/Unity/FN_Project_Unity/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638996441347787751
-    m_Hash: 1418619725
+      ticks: 639006414781637031
+    m_Hash: 737814254
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: E:/Unity/FN Project/Packages
-m_EditorVersion: 2023.2.20f1 (0e25a174756c)
+m_ProjectPath: E:/Unity/FN_Project_Unity/Packages
+m_EditorVersion: 2023.2.22f1 (6b19bf4f8115)
 m_ResolvedPackages:
+- packageId: com.unity.cinemachine@2.10.0
+  testable: 0
+  isDirectDependency: 1
+  version: 2.10.0
+  source: 1
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.cinemachine@2.10.0
+  assetPath: Packages/com.unity.cinemachine
+  name: com.unity.cinemachine
+  displayName: Cinemachine
+  author:
+    name: 
+    email: 
+    url: 
+  category: cinematography
+  type: assets
+  description: "Smart camera tools for passionate creators. \n\nNew starting from
+    2.7.1: Are you looking for the Cinemachine menu? It has moved to the GameObject
+    menu.\n\nIMPORTANT NOTE: If you are upgrading from the legacy Asset Store version
+    of Cinemachine, delete the Cinemachine asset from your project BEFORE installing
+    this version from the Package Manager."
+  errors: []
+  versions:
+    all:
+    - 2.1.11-beta.1
+    - 2.1.12
+    - 2.1.13
+    - 2.2.0
+    - 2.2.7
+    - 2.2.8
+    - 2.2.9
+    - 2.2.10-preview.3
+    - 2.2.10-preview.4
+    - 2.3.1
+    - 2.3.3
+    - 2.3.4
+    - 2.3.5-preview.3
+    - 2.4.0-preview.3
+    - 2.4.0-preview.4
+    - 2.4.0-preview.6
+    - 2.4.0-preview.7
+    - 2.4.0-preview.8
+    - 2.4.0-preview.9
+    - 2.4.0-preview.10
+    - 2.4.0
+    - 2.5.0
+    - 2.6.0-preview.2
+    - 2.6.0-preview.3
+    - 2.6.0-preview.5
+    - 2.6.0-preview.8
+    - 2.6.0
+    - 2.6.1-preview.6
+    - 2.6.1
+    - 2.6.2-preview.1
+    - 2.6.2
+    - 2.6.3-preview.2
+    - 2.6.3
+    - 2.6.4
+    - 2.6.5
+    - 2.6.9
+    - 2.6.10
+    - 2.6.11
+    - 2.6.14
+    - 2.6.15
+    - 2.6.17
+    - 2.7.1
+    - 2.7.2
+    - 2.7.3
+    - 2.7.4
+    - 2.7.5
+    - 2.7.8
+    - 2.7.9
+    - 2.8.0-exp.1
+    - 2.8.0-exp.2
+    - 2.8.0-pre.1
+    - 2.8.0
+    - 2.8.1
+    - 2.8.2
+    - 2.8.3
+    - 2.8.4
+    - 2.8.6
+    - 2.8.9
+    - 2.9.0-pre.1
+    - 2.9.0-pre.6
+    - 2.9.1
+    - 2.9.2
+    - 2.9.4
+    - 2.9.5
+    - 2.9.7
+    - 2.10.0
+    - 2.10.1
+    - 2.10.2
+    - 2.10.3
+    - 2.10.4
+    - 2.10.5
+    - 3.0.0-pre.3
+    - 3.0.0-pre.4
+    - 3.0.0-pre.5
+    - 3.0.0-pre.6
+    - 3.0.0-pre.7
+    - 3.0.0-pre.8
+    - 3.0.0-pre.9
+    - 3.0.1
+    - 3.1.0
+    - 3.1.1
+    - 3.1.2
+    - 3.1.3
+    - 3.1.4
+    - 3.1.5
+    compatible:
+    - 2.10.0
+    - 2.10.1
+    - 2.10.2
+    - 2.10.3
+    - 2.10.4
+    - 2.10.5
+    - 3.0.0-pre.3
+    - 3.0.0-pre.4
+    - 3.0.0-pre.5
+    - 3.0.0-pre.6
+    - 3.0.0-pre.7
+    - 3.0.0-pre.8
+    - 3.0.0-pre.9
+    - 3.0.1
+    - 3.1.0
+    - 3.1.1
+    - 3.1.2
+    - 3.1.3
+    - 3.1.4
+    - 3.1.5
+    recommended: 2.10.5
+    deprecated: []
+  dependencies:
+  - name: com.unity.test-framework
+    version: 1.1.31
+  resolvedDependencies:
+  - name: com.unity.test-framework
+    version: 1.3.9
+  - name: com.unity.ext.nunit
+    version: 2.0.5
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  keywords:
+  - camera
+  - follow
+  - rig
+  - fps
+  - cinematography
+  - aim
+  - orbit
+  - cutscene
+  - cinematic
+  - collision
+  - freelook
+  - cinemachine
+  - compose
+  - composition
+  - dolly
+  - track
+  - clearshot
+  - noise
+  - framing
+  - handheld
+  - lens
+  - impulse
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638451680320000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.cinemachine@2.10/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.com/Unity-Technologies/com.unity.cinemachine.git
+    revision: 3b55bae0f41b1048cc2080391ac3d4eb1c22b7ef
+    path: 
+  unityLifecycle:
+    version: 2.10.0
+    nextVersion: 3.0.0-pre.3
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"- Bugfix: CinemachineFreeLook.ForceCameraPosition()
+    sometimes did not take full effect immediately.\n- Bugfix: 3rdPersonFollow sometimes
+    generated invalid camera position when the target when DampingWhenOccluded is
+    nonzero."}'
+  assetStore:
+    productId: 
 - packageId: com.unity.collab-proxy@2.10.2
   testable: 0
   isDirectDependency: 1
   version: 2.10.2
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.collab-proxy@2.10.2
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.collab-proxy@2.10.2
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Unity Version Control
@@ -207,7 +410,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.2
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.feature.development@1.0.2
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.feature.development@1.0.2
   assetPath: Packages/com.unity.feature.development
   name: com.unity.feature.development
   displayName: Engineering
@@ -303,7 +506,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.8.6
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.timeline@1.8.6
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.timeline@1.8.6
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -484,7 +687,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.ugui@2.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.ugui@2.0.0
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -573,7 +776,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.8.0
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.visualscripting@1.8.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.visualscripting@1.8.0
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -692,7 +895,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.accessibility@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.accessibility@1.0.0
   assetPath: Packages/com.unity.modules.accessibility
   name: com.unity.modules.accessibility
   displayName: Accessibility
@@ -754,7 +957,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.ai@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.ai@1.0.0
   assetPath: Packages/com.unity.modules.ai
   name: com.unity.modules.ai
   displayName: AI
@@ -816,7 +1019,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.androidjni@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.androidjni@1.0.0
   assetPath: Packages/com.unity.modules.androidjni
   name: com.unity.modules.androidjni
   displayName: Android JNI
@@ -877,7 +1080,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.animation@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.animation@1.0.0
   assetPath: Packages/com.unity.modules.animation
   name: com.unity.modules.animation
   displayName: Animation
@@ -939,7 +1142,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.assetbundle@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.assetbundle@1.0.0
   assetPath: Packages/com.unity.modules.assetbundle
   name: com.unity.modules.assetbundle
   displayName: Asset Bundle
@@ -1001,7 +1204,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.audio@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.audio@1.0.0
   assetPath: Packages/com.unity.modules.audio
   name: com.unity.modules.audio
   displayName: Audio
@@ -1063,7 +1266,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.cloth@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.cloth@1.0.0
   assetPath: Packages/com.unity.modules.cloth
   name: com.unity.modules.cloth
   displayName: Cloth
@@ -1129,7 +1332,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.director@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.director@1.0.0
   assetPath: Packages/com.unity.modules.director
   name: com.unity.modules.director
   displayName: Director
@@ -1199,7 +1402,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.imageconversion@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.imageconversion@1.0.0
   assetPath: Packages/com.unity.modules.imageconversion
   name: com.unity.modules.imageconversion
   displayName: Image Conversion
@@ -1261,7 +1464,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.imgui@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.imgui@1.0.0
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -1323,7 +1526,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0
   assetPath: Packages/com.unity.modules.jsonserialize
   name: com.unity.modules.jsonserialize
   displayName: JSONSerialize
@@ -1385,7 +1588,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.particlesystem@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.particlesystem@1.0.0
   assetPath: Packages/com.unity.modules.particlesystem
   name: com.unity.modules.particlesystem
   displayName: Particle System
@@ -1447,7 +1650,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.physics@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.physics@1.0.0
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
@@ -1509,7 +1712,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.physics2d@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.physics2d@1.0.0
   assetPath: Packages/com.unity.modules.physics2d
   name: com.unity.modules.physics2d
   displayName: Physics 2D
@@ -1571,7 +1774,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.screencapture@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.screencapture@1.0.0
   assetPath: Packages/com.unity.modules.screencapture
   name: com.unity.modules.screencapture
   displayName: Screen Capture
@@ -1637,7 +1840,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.terrain@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.terrain@1.0.0
   assetPath: Packages/com.unity.modules.terrain
   name: com.unity.modules.terrain
   displayName: Terrain
@@ -1699,7 +1902,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0
   assetPath: Packages/com.unity.modules.terrainphysics
   name: com.unity.modules.terrainphysics
   displayName: Terrain Physics
@@ -1769,7 +1972,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.tilemap@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.tilemap@1.0.0
   assetPath: Packages/com.unity.modules.tilemap
   name: com.unity.modules.tilemap
   displayName: Tilemap
@@ -1834,7 +2037,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.ui@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.ui@1.0.0
   assetPath: Packages/com.unity.modules.ui
   name: com.unity.modules.ui
   displayName: UI
@@ -1896,7 +2099,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.uielements@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.uielements@1.0.0
   assetPath: Packages/com.unity.modules.uielements
   name: com.unity.modules.uielements
   displayName: UIElements
@@ -1974,7 +2177,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.umbra@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.umbra@1.0.0
   assetPath: Packages/com.unity.modules.umbra
   name: com.unity.modules.umbra
   displayName: Umbra
@@ -2036,7 +2239,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0
   assetPath: Packages/com.unity.modules.unityanalytics
   name: com.unity.modules.unityanalytics
   displayName: Unity Analytics
@@ -2106,7 +2309,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequest
   name: com.unity.modules.unitywebrequest
   displayName: Unity Web Request
@@ -2168,7 +2371,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestassetbundle
   name: com.unity.modules.unitywebrequestassetbundle
   displayName: Unity Web Request Asset Bundle
@@ -2238,7 +2441,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestaudio
   name: com.unity.modules.unitywebrequestaudio
   displayName: Unity Web Request Audio
@@ -2308,7 +2511,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequesttexture
   name: com.unity.modules.unitywebrequesttexture
   displayName: Unity Web Request Texture
@@ -2378,7 +2581,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestwww
   name: com.unity.modules.unitywebrequestwww
   displayName: Unity Web Request WWW
@@ -2464,7 +2667,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.vehicles@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.vehicles@1.0.0
   assetPath: Packages/com.unity.modules.vehicles
   name: com.unity.modules.vehicles
   displayName: Vehicles
@@ -2530,7 +2733,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.video@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.video@1.0.0
   assetPath: Packages/com.unity.modules.video
   name: com.unity.modules.video
   displayName: Video
@@ -2604,7 +2807,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.vr@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.vr@1.0.0
   assetPath: Packages/com.unity.modules.vr
   name: com.unity.modules.vr
   displayName: VR
@@ -2680,7 +2883,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.wind@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.wind@1.0.0
   assetPath: Packages/com.unity.modules.wind
   name: com.unity.modules.wind
   displayName: Wind
@@ -2742,7 +2945,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.xr@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.xr@1.0.0
   assetPath: Packages/com.unity.modules.xr
   name: com.unity.modules.xr
   displayName: XR
@@ -2816,7 +3019,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.subsystems@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.subsystems@1.0.0
   assetPath: Packages/com.unity.modules.subsystems
   name: com.unity.modules.subsystems
   displayName: Subsystems
@@ -2882,7 +3085,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.modules.hierarchycore@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.modules.hierarchycore@1.0.0
   assetPath: Packages/com.unity.modules.hierarchycore
   name: com.unity.modules.hierarchycore
   displayName: Hierarchy Core
@@ -2944,7 +3147,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.22
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.ide.visualstudio@2.0.22
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.ide.visualstudio@2.0.22
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -3049,7 +3252,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 3.0.28
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.ide.rider@3.0.28
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.ide.rider@3.0.28
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -3172,7 +3375,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.editorcoroutines@1.0.0
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.editorcoroutines@1.0.0
   assetPath: Packages/com.unity.editorcoroutines
   name: com.unity.editorcoroutines
   displayName: Editor Coroutines
@@ -3246,7 +3449,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.2
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.performance.profile-analyzer@1.2.2
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.performance.profile-analyzer@1.2.2
   assetPath: Packages/com.unity.performance.profile-analyzer
   name: com.unity.performance.profile-analyzer
   displayName: Profile Analyzer
@@ -3329,7 +3532,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.3.9
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.test-framework@1.3.9
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.test-framework@1.3.9
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -3474,7 +3677,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.5
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5
   assetPath: Packages/com.unity.testtools.codecoverage
   name: com.unity.testtools.codecoverage
   displayName: Code Coverage
@@ -3593,7 +3796,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.1
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.settings-manager@2.0.1
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.settings-manager@2.0.1
   assetPath: Packages/com.unity.settings-manager
   name: com.unity.settings-manager
   displayName: Settings Manager
@@ -3666,7 +3869,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.5
   source: 1
-  resolvedPath: E:\Unity\FN Project\Library\PackageCache\com.unity.ext.nunit@2.0.5
+  resolvedPath: E:\Unity\FN_Project_Unity\Library\PackageCache\com.unity.ext.nunit@2.0.5
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
