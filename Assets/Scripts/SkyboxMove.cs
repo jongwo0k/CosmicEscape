@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_ship : MonoBehaviour
+public class SkyboxMove : MonoBehaviour
 {
+    float degree = 0;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public float speed;
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        degree += Time.deltaTime;
+        if (degree >= 360) degree = 0;
+
+        RenderSettings.skybox.SetFloat("_Rotation", degree);
     }
 }

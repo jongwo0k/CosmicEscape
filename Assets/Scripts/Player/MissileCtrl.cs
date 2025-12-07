@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_ship : MonoBehaviour
+public class MissileCtrl : MonoBehaviour
 {
+    public float speed = 100f;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public float speed;
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.eulerAngles.normalized * speed);
     }
 }
