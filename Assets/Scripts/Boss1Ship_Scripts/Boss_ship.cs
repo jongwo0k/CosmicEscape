@@ -26,7 +26,7 @@ public class Boss_ship : Boss
     public float p1_bulletLife = 3.5f;
 
     // 패턴 2 설정 (부채꼴 탄막)
-    public float p2_preDelay = 1.0f;    // 부채꼴 패턴 시작 전 대기 시간
+    public float p2_preDelay = 1.0f;
     public int p2_waves = 5;
     public float p2_waveInterval = 0.28f;
     public int p2_bulletsPerWave = 15;
@@ -44,14 +44,14 @@ public class Boss_ship : Boss
     public float p3_laneWidth = 6f;
     public float p3_randomJitter = 0.6f;
     public float p3_warningDuration = 2f; // 장판 지속시간
-    public float p3_fireDelay = 1.5f; // 경고 후 불기둥 생성 대기시간
-    public float p3_fireScale = 7f; // 불기둥 스케일
-    public float p3_fireDuration = 1f; // 불기둥 지속시간 (1초)
+    public float p3_fireDelay = 1.5f;     // 경고 후 불기둥 생성 대기시간
+    public float p3_fireScale = 7f;       // 불기둥 스케일
+    public float p3_fireDuration = 1f;    // 불기둥 지속시간
 
     // 패턴 4 설정 (나선형 탄막)
     public float p4_duration = 3f;
-    public float p4_angleSpeed = 180f; // 원래 회전 속도 유지
-    public int p4_bulletsPerCircle = 4; // 수정: 한 서클당 4발로 간격 넓힘
+    public float p4_angleSpeed = 180f;
+    public int p4_bulletsPerCircle = 4;
     public float p4_bulletSpeed = 18f;
     public float p4_bulletLife = 4f;
 
@@ -61,16 +61,13 @@ public class Boss_ship : Boss
     public float p5_bulletLife = 3.5f;
 
     BossState _state = BossState.Idle;
-    // Coroutine _mainLoop; AttackRoutine에 통합
     Coroutine _p1Loop;
     Vector3 _spawnPos;
-    // bool _isRunning;     isDead에 통합
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        // p1 별도 Loop 유지
         if (_p1Loop != null)
         {
             StopCoroutine(_p1Loop);
@@ -95,7 +92,7 @@ public class Boss_ship : Boss
         yield return new WaitForSeconds(0.5f);
         do
         {
-            // 패턴1: 기본 패턴은 Center에서 연속 발사
+            // 패턴 1
             _state = BossState.Pattern1;
             _p1Loop = StartCoroutine(Pattern1_CenterContinuous());
             yield return new WaitForSeconds(3.0f);
@@ -106,7 +103,6 @@ public class Boss_ship : Boss
                 _p1Loop = null;
             }
 
-            // 패턴 2~6 중 하나 선택 (2..6)
             int pick = UnityEngine.Random.Range(2, 7);
 
             switch (pick)
@@ -118,7 +114,7 @@ public class Boss_ship : Boss
 
                 case 3:
                     _state = BossState.Pattern3;
-                    yield return StartCoroutine(Pattern3_Bombardment()); // 경고 -> 불기둥 패턴
+                    yield return StartCoroutine(Pattern3_Bombardment());
                     break;
 
                 case 4:
@@ -133,7 +129,7 @@ public class Boss_ship : Boss
 
                 case 6:
                     _state = BossState.Pattern6;
-                    yield return StartCoroutine(Pattern6_SideAlternating()); // 새로 추가된 좌우 발사 패턴
+                    yield return StartCoroutine(Pattern6_SideAlternating());
                     break;
             }
 
@@ -150,7 +146,7 @@ public class Boss_ship : Boss
         _state = BossState.Idle;
     }
 
-    // 패턴 1: 기본 패턴은 Center에서 연속 발사
+    // 패턴 1: 중앙 연속 발사
     IEnumerator Pattern1_CenterContinuous()
     {
         while (true)
@@ -160,7 +156,7 @@ public class Boss_ship : Boss
         }
     }
 
-    // 패턴 2: 부채꼴 연속 사격 (시작 전 대기)
+    // 패턴 2: 부채꼴 연사
     IEnumerator Pattern2_FanRapid()
     {
         yield return new WaitForSeconds(p2_preDelay);
@@ -183,52 +179,61 @@ public class Boss_ship : Boss
         }
     }
 
-    // 패턴 3: 경고 장판 생성 후 불기둥 생성 (장판은 플레이어 발밑에, y=0.01)
+    // 패턴 3: (0, 0, -11) 기준 / X만 랜덤 위치에 생성
     IEnumerator Pattern3_Bombardment()
     {
-        if (!player) yield break;
-
         GameObject[] warns = new GameObject[p3_count];
 
         for (int i = 0; i < p3_count; i++)
         {
             if (!warningPrefab) continue;
-            Vector3 warnPos = new Vector3(player.position.x, 0.01f, player.position.z); // 플레이어 발밑, y=0.01
+
+            float randomX = UnityEngine.Random.Range(-7f, 7f);
+
+            Vector3 warnPos = new Vector3(
+                randomX,
+                0.01f,
+                0.0f
+            );
+
             var w = Instantiate(warningPrefab);
             w.transform.position = warnPos;
             warns[i] = w;
+
             StartCoroutine(WarningAndFireRoutine(w, warnPos, i));
         }
 
-        // 패턴 전체 대기 시간: 경고가 뜨고 불기둥이 생성되고 지나갈 시간 확보
         yield return new WaitForSeconds(p3_warningDuration + p3_fireDuration);
     }
 
-    // 장판을 띄우고 일정시간 후 사라지게 하고 불기둥 생성
+    // 장판 위치 기준 불기둥 생성
     IEnumerator WarningAndFireRoutine(GameObject warnObj, Vector3 pos, int index)
     {
         if (warnObj)
         {
-            // 장판은 p3_warningDuration 동안 유지되고 마지막에는 서서히 사라짐
             StartCoroutine(FadeAndDestroyRenderer(warnObj, p3_warningDuration, 0.5f));
         }
 
-        // 경고 후 불기둥 생성 대기
         yield return new WaitForSeconds(p3_fireDelay);
 
-        // 불기둥 생성
         if (fireWallPrefab != null)
         {
             var fw = Instantiate(fireWallPrefab);
             Vector3 targetScale = Vector3.one * p3_fireScale;
             fw.transform.localScale = targetScale;
             float halfHeight = targetScale.y * 0.5f;
-            fw.transform.position = new Vector3(pos.x, pos.y + halfHeight, pos.z); // 장판 위에 불기둥 배치
+
+            fw.transform.position = new Vector3(
+                pos.x,
+                pos.y + halfHeight,
+                pos.z
+            );
+
             StartCoroutine(FireWallEffectRoutine(fw, p3_fireDuration));
         }
     }
 
-    // 불기둥 이펙트 간단 루틴: 등장 애니메이션과 펄스, 지속시간 후 제거
+    // 불기둥 이펙트
     IEnumerator FireWallEffectRoutine(GameObject fw, float duration)
     {
         if (fw == null) yield break;
@@ -238,6 +243,7 @@ public class Boss_ship : Boss
 
         float growTime = 0.25f;
         float t = 0f;
+
         while (t < growTime)
         {
             t += Time.deltaTime;
@@ -247,6 +253,7 @@ public class Boss_ship : Boss
         }
 
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -258,6 +265,7 @@ public class Boss_ship : Boss
         float shrinkTime = 0.35f;
         t = 0f;
         Vector3 startScale = fw.transform.localScale;
+
         while (t < shrinkTime)
         {
             t += Time.deltaTime;
@@ -269,15 +277,17 @@ public class Boss_ship : Boss
         Destroy(fw);
     }
 
-    // 경고 장판 및 하위 렌더러 페이드 후 Destroy
+    // 장판 페이드 처리
     IEnumerator FadeAndDestroyRenderer(GameObject go, float holdTime, float fadeTime)
     {
         if (go == null) yield break;
 
         yield return new WaitForSeconds(holdTime - fadeTime);
+
         Renderer[] rends = go.GetComponentsInChildren<Renderer>();
         float t = 0f;
         Material[] mats = new Material[rends.Length];
+
         for (int i = 0; i < rends.Length; i++)
         {
             if (rends[i] != null && rends[i].material != null)
@@ -290,6 +300,7 @@ public class Boss_ship : Boss
         {
             t += Time.deltaTime;
             float a = Mathf.Clamp01(1f - (t / fadeTime));
+
             for (int i = 0; i < rends.Length; i++)
             {
                 if (rends[i] == null || mats[i] == null) continue;
@@ -300,13 +311,14 @@ public class Boss_ship : Boss
                     mats[i].color = c;
                 }
             }
+
             yield return null;
         }
 
         Destroy(go);
     }
 
-    // 패턴 4: 나선형 공격 
+    // 패턴 4
     IEnumerator Pattern4_Spiral()
     {
         yield return new WaitForSeconds(1.7f);
@@ -323,14 +335,13 @@ public class Boss_ship : Boss
                 FireBullet(fireCenter.position, dir, p4_bulletSpeed, p4_bulletLife);
             }
 
-            angle += p4_angleSpeed * Time.deltaTime; // 원래 회전 증분 사용
+            angle += p4_angleSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
-
             yield return null;
         }
     }
 
-    // 패턴 5: 전체 방향으로 원형 폭발
+    // 패턴 5
     IEnumerator Pattern5_RingBurst()
     {
         for (int i = 0; i < p5_bulletCount; i++)
@@ -343,12 +354,13 @@ public class Boss_ship : Boss
         yield return null;
     }
 
-    // 패턴 6: 좌우 교차 연속 발사 
+    // 패턴 6
     IEnumerator Pattern6_SideAlternating()
     {
-        float duration = 3.0f; // 이 패턴의 지속시간
+        float duration = 3.0f;
         float elapsed = 0f;
         bool leftNext = true;
+
         while (elapsed < duration)
         {
             if (leftNext)
@@ -359,13 +371,14 @@ public class Boss_ship : Boss
             {
                 FireBullet(fireRight.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
             }
+
             leftNext = !leftNext;
             elapsed += p1_fireRate;
             yield return new WaitForSeconds(p1_fireRate);
         }
     }
 
-    // 총알 생성 함수 
+    // 총알 생성
     void FireBullet(Vector3 pos, Vector3 dir, float speed, float life)
     {
         if (!bulletPrefab) return;
@@ -373,6 +386,7 @@ public class Boss_ship : Boss
         var go = Instantiate(bulletPrefab, pos, Quaternion.LookRotation(dir));
         var sp = go.GetComponent<SimpleProjectile>() ?? go.AddComponent<SimpleProjectile>();
         sp.Init(dir.normalized, speed, life);
-        Destroy(go, 3f); // 모든 투사체는 3초 후 제거
+
+        Destroy(go, 3f);
     }
 }
