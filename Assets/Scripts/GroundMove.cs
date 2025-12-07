@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_ship : MonoBehaviour
+public class GroundMove : MonoBehaviour
 {
+    public float movespeed = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, 30);
     }
 
-    public float speed;
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += new Vector3(0, 0, 1) * -movespeed * Time.deltaTime;
     }
 }
