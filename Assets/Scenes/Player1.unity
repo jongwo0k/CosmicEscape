@@ -451,16 +451,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3876bb16f8e5689408e008808074a2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 0
+  player: {fileID: 894816188}
   Blood: {fileID: 5842631580383739798, guid: 2d54c62ded2821148ada0067b1d61ca6, type: 3}
-  player: {fileID: 894816185}
   Shockwave: {fileID: 9080140021571130472, guid: 1cec9a3fdb70c7a4c8c6787a2615b1b7, type: 3}
   ShockwavePos: {fileID: 345026171}
-  _anim: {fileID: 203081875}
+  playerMove: {fileID: 894816189}
   HPSlider: {fileID: 2034637480}
   MaxHP: 1000
   patternTime: 5
   rotateSpeed: 5
-  HP: 0
 --- !u!54 &203081873
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -488,11 +488,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!95 &203081875 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5850578553012415794, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
-  m_PrefabInstance: {fileID: 171980747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &304146391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,16 +1182,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0039432086, y: 0.0071204994, z: 0.008731505}
   m_Center: {x: 0.00029037026, y: -0.003919523, z: -0.0003175865}
---- !u!1 &894816185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4994585476864611850, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
-  m_PrefabInstance: {fileID: 7058723242848429899}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &894816188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4997900786982508110, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
   m_PrefabInstance: {fileID: 7058723242848429899}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &894816189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8648667662029668671, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
+  m_PrefabInstance: {fileID: 7058723242848429899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6e9cc9cca2b7d42be7ede7b5663859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930316343
 GameObject:
   m_ObjectHideFlags: 0
