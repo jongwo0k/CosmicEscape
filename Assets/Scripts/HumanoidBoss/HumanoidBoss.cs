@@ -5,6 +5,7 @@ using UnityEngine.XR;
 public class HumanoidBoss : Boss
 {
     [SerializeField] private float patternCooltime = 5.0f;
+    [SerializeField] private float golemMaxHP = 500;
 
     [Header("Throwing Pattern")]
     [SerializeField] private ThrowingRock rockPrefab;
@@ -14,13 +15,13 @@ public class HumanoidBoss : Boss
 
     [Header("Roar Pattern")]
     [SerializeField] private float rockSpreadAngle = 3f;
-    [SerializeField] private float roarAttackDamage = 10;
+    [SerializeField] private float roarAttackDamage = 3;
     [SerializeField] private float roarAttackSpeed = 20;
     [SerializeField] private Transform spawnPos; // 돌 생성 위치
 
     [Header("Jump Pattern")]
     [SerializeField] private float jumpAttackRadius = 2f; // 공격 범위
-    [SerializeField] private float jumpAttackDamage = 20;
+    [SerializeField] private float jumpAttackDamage = 10;
     [SerializeField] private GameObject redZonePrefab;
     [SerializeField] private GameObject redZoneEffect;
     private GameObject currentRedZone;
@@ -29,7 +30,7 @@ public class HumanoidBoss : Boss
     [Header("Magic Pattern")]
     [SerializeField] private int redZoneCount = 3;
     [SerializeField] private float magicAttackRadius = 1f;
-    [SerializeField] private float magicAttackDamage = 10;
+    [SerializeField] private float magicAttackDamage = 2;
     [SerializeField] private float magicSpawnRange = 1f; // 생성 범위
     [SerializeField] private float magicSpawnInterval = 0.7f;
     [SerializeField] private float magicExplodeDelay = 0.5f;
@@ -37,6 +38,7 @@ public class HumanoidBoss : Boss
 
     protected override void Awake()
     {
+        base.maxHP = golemMaxHP;
         base.Awake();
     }
 
@@ -104,7 +106,9 @@ public class HumanoidBoss : Boss
     public void SpawnRockEvent()
     {
         Vector3 spawnPoint = spawnPos.position;
-        Vector3 dir = (player.position - spawnPoint).normalized;
+        Vector3 targetPos = player.position + Vector3.up * 1.1f;
+        // Vector3 dir = (player.position - spawnPoint).normalized;
+        Vector3 dir = (targetPos - spawnPoint).normalized;
 
         Vector3 leftDir = Quaternion.Euler(0, -rockSpreadAngle, 0) * dir;
         Vector3 rightDir = Quaternion.Euler(0, rockSpreadAngle, 0) * dir;
@@ -190,6 +194,8 @@ public class HumanoidBoss : Boss
 
         if (distance <= radius)
         {
+            var playerMove = player.GetComponent<PlayerMove>();
+            playerMove.TakeDamage(damage);
             Debug.Log($"Player 회피 실패, 데미지: {damage}");
         }
     }

@@ -10,6 +10,6 @@ public class MenuController : MonoBehaviour
         if (startButtonEffect != null)
             startButtonEffect.StopAndReset(); //버튼 클릭 시 멈춤
 
-        SceneManager.LoadScene("HumanoidBoss"); // (임시) 나중에 FirstScene으로 수정
+        SceneManager.LoadScene("Player1"); // (임시) 나중에 FirstScene으로 수정
     }
 }

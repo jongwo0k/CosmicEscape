@@ -10,7 +10,6 @@ public class BossCtrl : Boss
     public GameObject ShockwavePos;
     public PlayerMove playerMove;
 
-    public Slider HPSlider;
     Transform OriginalTransform;
     Vector3 OriginalPos;
     //public GameObject Blood_Big;
@@ -26,22 +25,28 @@ public class BossCtrl : Boss
     bool isAttack = false;
     bool isShockwaveEx = false;
 
-    float damage = 0;
+    // float damage = 0;
 
     protected override void Awake()
     {
-        base.HP = MaxHP;
+        base.maxHP = MaxHP;
         base.Awake();
 
         OriginalPos = gameObject.transform.position;
         OriginalTransform = gameObject.transform;
-        damage = player.GetComponent<PlayerMove>().Player_ATK;
+        // damage = player.GetComponent<PlayerMove>().Player_ATK;
     }
 
     protected override void Start()
     {
         base.Start();
-        UpdateUI();
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        GameObject _Blood = Instantiate(Blood, transform.position, transform.rotation);
+        Destroy(_Blood, 0.3f);
+        base.TakeDamage(damage);
     }
 
     protected override IEnumerator AttackRoutine()
@@ -76,17 +81,6 @@ public class BossCtrl : Boss
 
             yield return null;
         }
-    }
-
-    protected override void Die()
-    {
-        base.Die();
-        anim.SetTrigger("Die");
-    }
-
-    protected override void UpdateUI()
-    {
-        HPSlider.value = currentHP / HP;
     }
 
     void IdlePattern()
@@ -153,7 +147,7 @@ public class BossCtrl : Boss
 
         if (playerMove != null && playerMove.isGround)
         {
-            playerMove.PlayerHP -= 7;
+            playerMove.TakeDamage(7);
         }
 
         yield return new WaitForSeconds(1f);
@@ -162,9 +156,10 @@ public class BossCtrl : Boss
         isPatternPlaying = false;
     }
 
+    /*
     private void OnCollisionEnter(Collision collision)
     {
-        /*
+        
         if (collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.transform.parent.gameObject);
@@ -180,7 +175,7 @@ public class BossCtrl : Boss
             Destroy(_Blood, 0.3f);
             HP -= 30;
         }
-        */
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -194,4 +189,5 @@ public class BossCtrl : Boss
             base.TakeDamage(damage);
         }
     }
+    */
 }

@@ -301,7 +301,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1193912736}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5791706784618636204, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_TagString
@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5792744366562842766, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_TagString
-      value: Monster
+      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 5793589540921969818, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_TagString
@@ -325,11 +325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5794526363542072584, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5794526363542072584, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5794526363542072584, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_LocalScale.z
@@ -341,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5794526363542072584, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5794526363542072584, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_LocalPosition.z
@@ -451,13 +451,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3876bb16f8e5689408e008808074a2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
+  maxHP: 100
+  hpSlider: {fileID: 2034637480}
   player: {fileID: 894816188}
   Blood: {fileID: 5842631580383739798, guid: 2d54c62ded2821148ada0067b1d61ca6, type: 3}
   Shockwave: {fileID: 9080140021571130472, guid: 1cec9a3fdb70c7a4c8c6787a2615b1b7, type: 3}
   ShockwavePos: {fileID: 345026171}
   playerMove: {fileID: 894816189}
-  HPSlider: {fileID: 2034637480}
   MaxHP: 1000
   patternTime: 5
   rotateSpeed: 5
@@ -1727,10 +1727,9 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 171980748}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1352336362
@@ -2834,6 +2833,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5201730894684596545, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201730894684596545, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 504
+      objectReference: {fileID: 0}
     - target: {fileID: 6185575763606167871, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2880,3 +2887,4 @@ SceneRoots:
   - {fileID: 943439359}
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 171980747}
