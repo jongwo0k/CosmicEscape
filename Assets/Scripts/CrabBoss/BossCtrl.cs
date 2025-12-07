@@ -1,16 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossCtrl : MonoBehaviour
+public class BossCtrl : Boss
 {
     public GameObject Blood;
-    public GameObject player;
+    // public GameObject Player;
     public GameObject Shockwave;
     public GameObject ShockwavePos;
-    public Animator _anim;
+    public PlayerMove playerMove;
+
     public Slider HPSlider;
     Transform OriginalTransform;
     Vector3 OriginalPos;
@@ -19,48 +18,49 @@ public class BossCtrl : MonoBehaviour
     public float MaxHP = 10;
     public float patternTime = 15f;
     public float rotateSpeed = 5f;
-    public float HP;
+    // public float HP;
+
     int activatedPattern = -1;
-    bool isPatternCooldown = true;
+    // bool isPatternCooldown = true;
     bool isPatternPlaying = false;
     bool isAttack = false;
     bool isShockwaveEx = false;
-    bool isAlive = true;
-
-    Rigidbody rb;
 
     float damage = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    protected override void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        damage = player.GetComponent<PlayerMove>().Player_ATK;
-        HP = MaxHP;
+        base.HP = MaxHP;
+        base.Awake();
+
         OriginalPos = gameObject.transform.position;
         OriginalTransform = gameObject.transform;
-        StartCoroutine(patternTimer());
+        damage = player.GetComponent<PlayerMove>().Player_ATK;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Start()
     {
-        damage = player.GetComponent<PlayerMove>().Player_ATK;
-        HPSlider.value = HP / MaxHP;
-        if (HP <= 0 && isAlive) BossDead();
-        
-        if(isAlive && player.GetComponent<PlayerMove>().isPlayerAlive)
-        {
-            if (!isPatternCooldown)
-            {
-                activatedPattern = (int)Random.Range(0, 2);
-                Debug.Log(activatedPattern);
-                isPatternCooldown = true;
-            }
+        base.Start();
+        UpdateUI();
+    }
 
+    protected override IEnumerator AttackRoutine()
+    {
+        float patternCooldown = 0f;
+        while (!isDead && playerMove != null && playerMove.isPlayerAlive)
+        {
             if (activatedPattern == -1)
             {
-                _anim.SetTrigger("Idle");
+                anim.SetTrigger("Idle");
                 IdlePattern();
+
+                patternCooldown += Time.deltaTime;
+
+                if (patternCooldown >= patternTime)
+                {
+                    activatedPattern = (int)Random.Range(0, 2);
+                    patternCooldown = 0f; // 타이머 초기화
+                }
             }
 
             if (activatedPattern == 0)
@@ -73,15 +73,20 @@ public class BossCtrl : MonoBehaviour
                 Debug.Log("JumpPattern");
                 JumpAttackPattern();
             }
-        }
-        
 
+            yield return null;
+        }
     }
 
-    void BossDead()
+    protected override void Die()
     {
-        isAlive = false;
-        _anim.SetTrigger("Die");
+        base.Die();
+        anim.SetTrigger("Die");
+    }
+
+    protected override void UpdateUI()
+    {
+        HPSlider.value = currentHP / HP;
     }
 
     void IdlePattern()
@@ -107,16 +112,9 @@ public class BossCtrl : MonoBehaviour
 
     void JumpAttackPattern()
     {
-        _anim.SetTrigger("Intimidate_2");
+        anim.SetTrigger("Intimidate_2");
         isShockwaveEx = false;
         if(!isPatternPlaying) StartCoroutine(jumpAttack());
-    }
-
-    IEnumerator patternTimer()
-    {
-        yield return new WaitForSeconds(patternTime);
-        isPatternCooldown = false;
-        StartCoroutine(patternTimer());
     }
 
     IEnumerator patternWhileTimer(float time)
@@ -126,8 +124,8 @@ public class BossCtrl : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isAttack = true;
         rotateSpeed = 1.5f;
-        _anim.SetTrigger("Attack_1");
-        _anim.SetTrigger("Idle");
+        anim.SetTrigger("Attack_1");
+        anim.SetTrigger("Idle");
         
         yield return new WaitForSeconds(time);
         rotateSpeed = 5f;
@@ -140,7 +138,7 @@ public class BossCtrl : MonoBehaviour
     {
         isPatternPlaying = true;
         yield return new WaitForSeconds(1.8f);
-        _anim.SetTrigger("Idle");
+        anim.SetTrigger("Idle");
         rb.AddForce(Vector3.up * 100f, ForceMode.Impulse);
         yield return new WaitForSeconds(0.7f);
         rb.AddForce(Vector3.up * -170f, ForceMode.Impulse);
@@ -153,10 +151,13 @@ public class BossCtrl : MonoBehaviour
             isShockwaveEx = true;
         }
 
-        if(player.GetComponent<PlayerMove>().isGround)
-            player.GetComponent<PlayerMove>().PlayerHP -= 7;
+        if (playerMove != null && playerMove.isGround)
+        {
+            playerMove.PlayerHP -= 7;
+        }
+
         yield return new WaitForSeconds(1f);
-        _anim.SetTrigger("Idle");
+        anim.SetTrigger("Idle");
         activatedPattern = -1;
         isPatternPlaying = false;
     }
@@ -189,7 +190,8 @@ public class BossCtrl : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
             GameObject _Blood = Instantiate(Blood, other.transform.position, other.gameObject.transform.rotation);
             Destroy(_Blood, 0.3f);
-            HP -= damage;
+            damage = playerMove.Player_ATK;
+            base.TakeDamage(damage);
         }
     }
 }

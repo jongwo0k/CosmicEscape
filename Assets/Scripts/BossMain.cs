@@ -11,6 +11,7 @@ public abstract class Boss : MonoBehaviour
     [Header("Component")]
     protected Animator anim;
     protected Collider col;
+    protected Rigidbody rb;
 
     [SerializeField] protected Transform player; // Player 현재 위치
 
@@ -44,6 +45,7 @@ public abstract class Boss : MonoBehaviour
         currentHP = HP;
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     protected virtual void Start()
@@ -51,7 +53,7 @@ public abstract class Boss : MonoBehaviour
         UpdateUI();
     }
 
-    // Bullet에 맞으면 HP 감소
+    /* Bullet에 맞으면 HP 감소
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
@@ -62,8 +64,10 @@ public abstract class Boss : MonoBehaviour
                 TakeDamage(bulletDamage);
             }
             Destroy(other.transform.parent.gameObject); // Empty안에 Bullet(Capsule)이 들어 있을 경우 전부 삭제, 부모 Empty없으면 Destroy(other.gameObject);
+            
         }
     }
+    */
 
     // 피격 처리
     public virtual void TakeDamage(float damage)
@@ -83,7 +87,7 @@ public abstract class Boss : MonoBehaviour
     // UI 업데이트 (HP, ...)
     protected virtual void UpdateUI()
     {
-
+        // HPSlider.value = currentHP / HP;
     }
 
     // 사망 처리
@@ -91,6 +95,7 @@ public abstract class Boss : MonoBehaviour
     {
         isDead = true;
         anim.SetBool("isDead", true);
+        anim.SetTrigger("Die");
         col.enabled = false;
     }
 

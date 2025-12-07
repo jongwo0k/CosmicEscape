@@ -345,6 +345,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Functions
       objectReference: {fileID: 0}
+    - target: {fileID: 2312704248787079647, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
+      propertyPath: m_Height
+      value: 0.4145764
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312704248787079647, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
+      propertyPath: m_Center.y
+      value: 0.21271181
+      objectReference: {fileID: 0}
     - target: {fileID: 3473953383249044920, guid: 8577b4b3297fc3748ac33b61b8726911, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
