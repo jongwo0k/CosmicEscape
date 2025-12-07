@@ -15,6 +15,8 @@ public class Boss_ship : Boss
     public GameObject warningPrefab;
     public GameObject fireWallPrefab; // 불기둥(실린더) 프리팹 참조
 
+    [SerializeField] private float shipMaxHP = 800;
+
     // 공통 설정
     public float zDirectionSign = -1f;
     public float patternGap = 0.6f;
@@ -46,7 +48,7 @@ public class Boss_ship : Boss
     public float p3_warningDuration = 2f; // 장판 지속시간
     public float p3_fireDelay = 1.5f;     // 경고 후 불기둥 생성 대기시간
     public float p3_fireScale = 7f;       // 불기둥 스케일
-    public float p3_fireDuration = 1f;    // 불기둥 지속시간
+    public float p3_fireDuration = 1f;    // 불기둥 지속시간 (1초)
 
     // 패턴 4 설정 (나선형 탄막)
     public float p4_duration = 3f;
@@ -77,6 +79,7 @@ public class Boss_ship : Boss
 
     protected override void Awake()
     {
+        base.maxHP = shipMaxHP;
         base.Awake();
         _spawnPos = transform.position;
     }
@@ -92,7 +95,7 @@ public class Boss_ship : Boss
         yield return new WaitForSeconds(0.5f);
         do
         {
-            // 패턴 1
+            // 패턴1
             _state = BossState.Pattern1;
             _p1Loop = StartCoroutine(Pattern1_CenterContinuous());
             yield return new WaitForSeconds(3.0f);
@@ -151,7 +154,9 @@ public class Boss_ship : Boss
     {
         while (true)
         {
-            FireBullet(fireCenter.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+            Vector3 playerDir = TargetDirPlayer(fireCenter.position);
+            // FireBullet(fireCenter.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+            FireBullet(fireCenter.position, playerDir, p1_bulletSpeed, p1_bulletLife);
             yield return new WaitForSeconds(p1_fireRate);
         }
     }
@@ -163,15 +168,21 @@ public class Boss_ship : Boss
 
         for (int w = 0; w < p2_waves; w++)
         {
+            Vector3 toPlayer = player.position - fireCenter.position;
+            float centerAngle = Mathf.Atan2(toPlayer.x, toPlayer.z) * Mathf.Rad2Deg;
+            centerAngle += 180f;
+
             float arc = p2_arcDegrees;
             int count = Mathf.Max(1, p2_bulletsPerWave);
-            float start = -arc * 0.5f;
+            // float start = -arc * 0.5f;
+            float start = centerAngle - (arc * 0.5f);
             float step = (count <= 1) ? 0f : (arc / (count - 1));
 
             for (int i = 0; i < count; i++)
             {
                 float angle = start + step * i;
-                Vector3 dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward * zDirectionSign;
+                // Vector3 dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward * zDirectionSign;
+                Vector3 dir = TargetDirGround(fireCenter.position, angle);
                 FireBullet(fireCenter.position, dir, p2_bulletSpeed, p2_bulletLife);
             }
 
@@ -179,27 +190,20 @@ public class Boss_ship : Boss
         }
     }
 
-    // 패턴 3: (0, 0, -11) 기준 / X만 랜덤 위치에 생성
+    // 패턴 3: 경고 장판 생성 후 불기둥 생성? 패턴 3: (0, 0, -11) 기준 / X만 랜덤 위치에 생성?
     IEnumerator Pattern3_Bombardment()
     {
+        if (!player) yield break;
+
         GameObject[] warns = new GameObject[p3_count];
 
         for (int i = 0; i < p3_count; i++)
         {
             if (!warningPrefab) continue;
-
-            float randomX = UnityEngine.Random.Range(-7f, 7f);
-
-            Vector3 warnPos = new Vector3(
-                randomX,
-                0.01f,
-                0.0f
-            );
-
+            Vector3 warnPos = new Vector3(player.position.x, 0.01f, player.position.z);
             var w = Instantiate(warningPrefab);
             w.transform.position = warnPos;
             warns[i] = w;
-
             StartCoroutine(WarningAndFireRoutine(w, warnPos, i));
         }
 
@@ -222,13 +226,7 @@ public class Boss_ship : Boss
             Vector3 targetScale = Vector3.one * p3_fireScale;
             fw.transform.localScale = targetScale;
             float halfHeight = targetScale.y * 0.5f;
-
-            fw.transform.position = new Vector3(
-                pos.x,
-                pos.y + halfHeight,
-                pos.z
-            );
-
+            fw.transform.position = new Vector3(pos.x, pos.y + halfHeight, pos.z);
             StartCoroutine(FireWallEffectRoutine(fw, p3_fireDuration));
         }
     }
@@ -243,7 +241,6 @@ public class Boss_ship : Boss
 
         float growTime = 0.25f;
         float t = 0f;
-
         while (t < growTime)
         {
             t += Time.deltaTime;
@@ -253,7 +250,6 @@ public class Boss_ship : Boss
         }
 
         float elapsed = 0f;
-
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -265,7 +261,6 @@ public class Boss_ship : Boss
         float shrinkTime = 0.35f;
         t = 0f;
         Vector3 startScale = fw.transform.localScale;
-
         while (t < shrinkTime)
         {
             t += Time.deltaTime;
@@ -283,11 +278,9 @@ public class Boss_ship : Boss
         if (go == null) yield break;
 
         yield return new WaitForSeconds(holdTime - fadeTime);
-
         Renderer[] rends = go.GetComponentsInChildren<Renderer>();
         float t = 0f;
         Material[] mats = new Material[rends.Length];
-
         for (int i = 0; i < rends.Length; i++)
         {
             if (rends[i] != null && rends[i].material != null)
@@ -300,7 +293,6 @@ public class Boss_ship : Boss
         {
             t += Time.deltaTime;
             float a = Mathf.Clamp01(1f - (t / fadeTime));
-
             for (int i = 0; i < rends.Length; i++)
             {
                 if (rends[i] == null || mats[i] == null) continue;
@@ -311,7 +303,6 @@ public class Boss_ship : Boss
                     mats[i].color = c;
                 }
             }
-
             yield return null;
         }
 
@@ -331,12 +322,14 @@ public class Boss_ship : Boss
             for (int i = 0; i < p4_bulletsPerCircle; i++)
             {
                 float a = angle + (360f / p4_bulletsPerCircle) * i;
-                Vector3 dir = Quaternion.Euler(0f, a, 0f) * Vector3.forward * zDirectionSign;
+                // Vector3 dir = Quaternion.Euler(0f, a, 0f) * Vector3.forward * zDirectionSign;
+                Vector3 dir = TargetDirGround(fireCenter.position, a);
                 FireBullet(fireCenter.position, dir, p4_bulletSpeed, p4_bulletLife);
             }
 
             angle += p4_angleSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
+
             yield return null;
         }
     }
@@ -347,7 +340,8 @@ public class Boss_ship : Boss
         for (int i = 0; i < p5_bulletCount; i++)
         {
             float ang = (360f / p5_bulletCount) * i;
-            Vector3 dir = Quaternion.Euler(0f, ang, 0f) * Vector3.forward;
+            // Vector3 dir = Quaternion.Euler(0f, ang, 0f) * Vector3.forward;
+            Vector3 dir = TargetDirGround(fireCenter.position, ang);
             FireBullet(fireCenter.position, dir, p5_bulletSpeed, p5_bulletLife);
         }
 
@@ -360,18 +354,20 @@ public class Boss_ship : Boss
         float duration = 3.0f;
         float elapsed = 0f;
         bool leftNext = true;
-
         while (elapsed < duration)
         {
             if (leftNext)
             {
-                FireBullet(fireLeft.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+                Vector3 playerDir = TargetDirPlayer(fireCenter.position);
+                // FireBullet(fireLeft.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+                FireBullet(fireLeft.position, playerDir, p1_bulletSpeed, p1_bulletLife);
             }
             else
             {
-                FireBullet(fireRight.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+                Vector3 playerDir = TargetDirPlayer(fireCenter.position);
+                // FireBullet(fireRight.position, Vector3.forward * zDirectionSign, p1_bulletSpeed, p1_bulletLife);
+                FireBullet(fireRight.position, playerDir, p1_bulletSpeed, p1_bulletLife);
             }
-
             leftNext = !leftNext;
             elapsed += p1_fireRate;
             yield return new WaitForSeconds(p1_fireRate);
@@ -386,7 +382,27 @@ public class Boss_ship : Boss
         var go = Instantiate(bulletPrefab, pos, Quaternion.LookRotation(dir));
         var sp = go.GetComponent<SimpleProjectile>() ?? go.AddComponent<SimpleProjectile>();
         sp.Init(dir.normalized, speed, life);
-
         Destroy(go, 3f);
+    }
+
+    // 방향 조절
+    Vector3 TargetDirPlayer(Vector3 startPos)
+    {
+        Vector3 dir = (player.position - startPos).normalized;
+        return dir;
+    }
+
+    Vector3 TargetDirGround(Vector3 startPos, float angleY)
+    {
+        Vector3 planeDir = Quaternion.Euler(0f, angleY, 0f) * Vector3.forward * zDirectionSign;
+
+        if (player == null) return planeDir;
+
+        float dist = Vector3.Distance(new Vector3(startPos.x, 0, startPos.z), new Vector3(player.position.x, 0, player.position.z));
+
+        Vector3 targetPos = startPos + (planeDir * dist);
+        targetPos.y = player.position.y + 0.1f;
+
+        return (targetPos - startPos).normalized;
     }
 }

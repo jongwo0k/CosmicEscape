@@ -3,22 +3,31 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 10f;
+    public float damage = 1.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, 2.2f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.tag == "Bullet")
+        {
+            other.gameObject.TryGetComponent<Boss>(out var boss);
+            boss.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
-
+    */
 }

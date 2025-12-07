@@ -64,6 +64,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        HPSlider.value = PlayerHP / Player_MaxHP;
         tr = GetComponent<Transform>();
         CrossHairCtrl();
         StartCoroutine(Fire());
@@ -74,13 +75,14 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPSlider.value = PlayerHP / Player_MaxHP;
+        // HPSlider.value = PlayerHP / Player_MaxHP;
 
         if(PlayerHP <= 0 && isPlayerAlive)
         {
             isPlayerAlive = false;
             isATK = false;
             animator.SetTrigger("Death");
+            GameManager.Instance.GameIsOver();
         }
 
         if (isPlayerAlive)
@@ -142,10 +144,14 @@ public class PlayerMove : MonoBehaviour
             Vector3 dir = new Vector3(x, 0, 0);
             tr.Translate(dir * speed * Time.deltaTime);
 
-            float degree = Mathf.Atan2(FirePos.transform.position.x - MainTarget.transform.position.x, MainTarget.transform.position.z - FirePos.transform.position.z) * Mathf.Rad2Deg;
-            float y_degree = Mathf.Atan2(MainTarget.transform.position.y - FirePos.transform.position.y, MainTarget.transform.position.z - FirePos.transform.position.z) * Mathf.Rad2Deg;
-            FirePos.eulerAngles = new Vector3(-y_degree + Random.Range(-5f / ATK_accuracy, 5f / ATK_accuracy), -degree + Random.Range(-5f / ATK_accuracy, 5f / ATK_accuracy), 0);
-            Rifle.transform.eulerAngles = new Vector3(-y_degree, -degree - 90f, 0);
+            if (MainTarget != null)
+            {
+                float degree = Mathf.Atan2(FirePos.transform.position.x - MainTarget.transform.position.x, MainTarget.transform.position.z - FirePos.transform.position.z) * Mathf.Rad2Deg;
+                float y_degree = Mathf.Atan2(MainTarget.transform.position.y - FirePos.transform.position.y, MainTarget.transform.position.z - FirePos.transform.position.z) * Mathf.Rad2Deg;
+                FirePos.eulerAngles = new Vector3(-y_degree + Random.Range(-5f / ATK_accuracy, 5f / ATK_accuracy), -degree + Random.Range(-5f / ATK_accuracy, 5f / ATK_accuracy), 0);
+                Rifle.transform.eulerAngles = new Vector3(-y_degree, -degree - 90f, 0);
+            }
+            
             /*
             float ms1_degree = Mathf.Atan2(MissilePos_1.transform.position.x - MainTarget.transform.position.x, MainTarget.transform.position.z - MissilePos_1.transform.position.z) * Mathf.Rad2Deg;
             float ms1_y_degree = Mathf.Atan2(MissilePos_1.transform.position.y - MainTarget.transform.position.y, MainTarget.transform.position.z - MissilePos_1.transform.position.z) * Mathf.Rad2Deg;
@@ -158,6 +164,16 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
+
+    public void TakeDamage(float damage)
+    {
+        if (!isPlayerAlive) return;
+        if (isRoll) return;
+
+        PlayerHP -= damage;
+        HPSlider.value = PlayerHP / Player_MaxHP;
+    }
+
     void CrossHairCtrl()
     {
         Target_1.SetActive(false);
@@ -271,7 +287,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.gameObject.tag == "Spike")
         {
-            PlayerHP -= 2f;
+            TakeDamage(2);
             Debug.Log(PlayerHP);
         }
     }
