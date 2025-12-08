@@ -47,12 +47,18 @@ public class GameManager : MonoBehaviour
                 bgmPlayer.Stop();
                 bgmPlayer.Play();
             }
+
+            gameOverUI.SetActive(false);
+            gameClearUI.SetActive(false);
+            stageClearUI.SetActive(false);
         }
     }
 
     // 게임 시작
     void Start()
     {
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Game Start");
     }
@@ -71,6 +77,7 @@ public class GameManager : MonoBehaviour
         if(gameClearUI != null) // Clear UI 존재, 버튼으로 이동
         {
             gameClearUI.SetActive(true);
+            Time.timeScale = 0f;
         }
         else // 없는 경우
         {
@@ -90,6 +97,7 @@ public class GameManager : MonoBehaviour
         if (gameOverUI != null) // Over UI 존재, 버튼으로 이동
         {
             gameOverUI.SetActive(true);
+            Time.timeScale = 0f;
         }
         else
         {
@@ -99,30 +107,32 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MoveNextStage()
     {
-        if(stageClearUI != null) // Clear UI 존재, 버튼으로 이동
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int totalScenes = SceneManager.sceneCountInBuildSettings;
+
+        if (currentSceneIndex >= totalScenes - 1)
+        {
+            GameClear();
+            yield break;
+        }
+
+        if (stageClearUI != null)
         {
             stageClearUI.SetActive(true);
+            Time.timeScale = 0f;
         }
-        else // 없는 경우
+        else
         {
-            yield return new WaitForSeconds(3.0f); // 사망 애니메이션 재생 대기
-
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-            if (currentSceneIndex < SceneManager.sceneCountInBuildSettings - 1) // 다음 씬 (Build Settings)
-            {
-                SceneManager.LoadScene(currentSceneIndex + 1);
-            }
-            else
-            {
-                GameClear();
-            }
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene(currentSceneIndex + 1);
         }
     }
 
     // Button
     public void ClearButton()
     {
+        Time.timeScale = 1f;
+
         if (stageClearUI != null)
         {
             stageClearUI.SetActive(false);
@@ -142,10 +152,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartButton()
     {
-        if (gameOverUI != null)
-        {
-            gameOverUI.SetActive(false);
-        }
+        Time.timeScale = 1f;
+
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (gameClearUI != null) gameClearUI.SetActive(false);
+        if (stageClearUI != null) stageClearUI.SetActive(false);
 
         SceneManager.LoadScene("MainMenu");
     }
