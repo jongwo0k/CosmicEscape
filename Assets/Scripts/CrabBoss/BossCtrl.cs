@@ -42,13 +42,6 @@ public class BossCtrl : Boss
         base.Start();
     }
 
-    public override void TakeDamage(float damage)
-    {
-        GameObject _Blood = Instantiate(Blood, transform.position, transform.rotation);
-        Destroy(_Blood, 0.3f);
-        base.TakeDamage(damage);
-    }
-
     protected override IEnumerator AttackRoutine()
     {
         float patternCooldown = 0f;
@@ -177,8 +170,8 @@ public class BossCtrl : Boss
         }
         
     }
-
-    private void OnTriggerEnter(Collider other)
+    */
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
         {
@@ -189,5 +182,4 @@ public class BossCtrl : Boss
             base.TakeDamage(damage);
         }
     }
-    */
 }

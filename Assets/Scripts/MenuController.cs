@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
         IEnumerator LoadSceneWithDelay()
         {
             yield return new WaitForSeconds(delayBeforeLoad);
-            SceneManager.LoadScene("Player1"); // 나중에 FirstScene으로 교체
+            SceneManager.LoadScene("HumanoidBoss"); // 나중에 FirstScene으로 교체
         }
     }
 }

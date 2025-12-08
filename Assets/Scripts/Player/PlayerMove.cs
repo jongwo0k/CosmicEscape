@@ -207,6 +207,7 @@ public class PlayerMove : MonoBehaviour
             PlayerHP += 10;
         else
             PlayerHP = 20;
+        HPSlider.value = PlayerHP / Player_MaxHP;
         Time.timeScale = 1;
         ReinforceScreen.SetActive(false);
         StartCoroutine(ReinforceTimer());
