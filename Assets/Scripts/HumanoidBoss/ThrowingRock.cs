@@ -24,7 +24,7 @@ public class ThrowingRock : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         // Bullet, Boss 자신 등과는 충돌X -> Layer or Tag
-        if (other.CompareTag("Boss") || other.CompareTag("Rock"))
+        if (other.CompareTag("Boss") || other.CompareTag("Rock") || other.CompareTag("Bullet"))
         {
             return;
         }

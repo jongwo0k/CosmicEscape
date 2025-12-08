@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameClearUI;
     public GameObject gameOverUI;
 
+    public AudioSource bgmPlayer;
+
     private string[] projectileTags = { "Bullet", "Rock", "Bullet_ship" };
 
     void Awake()
@@ -24,6 +26,27 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainMenu")
+        {
+            if (bgmPlayer != null)
+            {
+                bgmPlayer.Stop();
+                bgmPlayer.Play();
+            }
         }
     }
 
