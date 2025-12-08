@@ -459,7 +459,7 @@ MonoBehaviour:
   Shockwave: {fileID: 9080140021571130472, guid: 1cec9a3fdb70c7a4c8c6787a2615b1b7, type: 3}
   ShockwavePos: {fileID: 345026171}
   playerMove: {fileID: 894816189}
-  MaxHP: 1000
+  MaxHP: 500
   patternTime: 5
   rotateSpeed: 5
 --- !u!54 &203081873
