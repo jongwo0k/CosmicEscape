@@ -291,5 +291,10 @@ public class PlayerMove : MonoBehaviour
             TakeDamage(2);
             Debug.Log(PlayerHP);
         }
+        else if(other.gameObject.tag == "DeadZone")
+        {
+            PlayerHP = 0;
+            Debug.Log("Ãß¶ô");
+        }
     }
 }
