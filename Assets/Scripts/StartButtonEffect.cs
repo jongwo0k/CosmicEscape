@@ -4,6 +4,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class StartButtonEffect : MonoBehaviour
 {
+    [Header("Sound")]
+    public AudioClip clickSfx;
+    private AudioSource _audio;
+
     [Header("Motion")]
     public bool enableBob = true;
     public float bobAmplitude = 2f;      // 픽셀 기준, 너무 크지 않게 기본 2
@@ -20,6 +24,7 @@ public class StartButtonEffect : MonoBehaviour
     public float outlineAlphaMin = 0.0f;
     public float outlineAlphaMax = 0.35f;
 
+
     RectTransform _rt;
     Vector2 _startAnchoredPos;
 
@@ -33,6 +38,8 @@ public class StartButtonEffect : MonoBehaviour
 
     void Awake()
     {
+        _audio = GetComponent<AudioSource>();
+
         _rt = GetComponent<RectTransform>();
         _startAnchoredPos = _rt.anchoredPosition;
 
@@ -103,4 +110,13 @@ public class StartButtonEffect : MonoBehaviour
         if (_outline != null)
             _outline.effectColor = _origOutlineColor;
     }
+
+    public void PlayClickSound()
+    {
+        if (_audio != null && clickSfx != null)
+        {
+            _audio.PlayOneShot(clickSfx);
+        }
+    }
+
 }

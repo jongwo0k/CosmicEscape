@@ -1,19 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public abstract class Boss : MonoBehaviour
 {
     [Header("Status")]
-    [SerializeField] protected float HP = 100; // 임의
+    [SerializeField] protected float maxHP = 100; // 임의
     protected float currentHP;
+    public float damage = 0;
+
+    [SerializeField] protected Slider hpSlider;
     protected bool isDead = false;
 
     [Header("Component")]
     protected Animator anim;
     protected Collider col;
+    protected Rigidbody rb;
 
-    
-    // [SerializeField] protected Transform player; // 플레이어 위치
+    [SerializeField] protected Transform player; // Player 현재 위치
+
 
     // 코루틴 공통 관리
     protected Coroutine attackRoutine;
@@ -41,28 +46,17 @@ public abstract class Boss : MonoBehaviour
     protected virtual void Awake()
     {
         isDead = false;
-        currentHP = HP;
+        currentHP = maxHP;
+        damage = player.GetComponent<PlayerMove>().Player_ATK;
+
         anim = GetComponent<Animator>();
         col = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     protected virtual void Start()
     {
         UpdateUI();
-    }
-
-    // Bullet에 맞으면 HP 감소
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Bullet")
-        {
-            if (!isDead)
-            {
-                float bulletDamage = 1; // (1=임시) Player의 Bullet에서 데미지 가져옴
-                TakeDamage(bulletDamage);
-            }
-            Destroy(other.transform.parent.gameObject); // Empty안에 Bullet(Capsule)이 들어 있을 경우 전부 삭제, 부모 Empty없으면 Destroy(other.gameObject);
-        }
     }
 
     // 피격 처리
@@ -80,18 +74,54 @@ public abstract class Boss : MonoBehaviour
         }
     }
 
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            damage = player.GetComponent<PlayerMove>().Player_ATK;
+            TakeDamage(damage);
+            Destroy(other.gameObject);
+        }
+    }
+
     // UI 업데이트 (HP, ...)
     protected virtual void UpdateUI()
     {
-
+        hpSlider.value = currentHP / maxHP;
     }
 
     // 사망 처리
     protected virtual void Die()
     {
         isDead = true;
-        anim.SetBool("isDead", true);
+        StopCoroutine(attackRoutine);
+        attackRoutine = null;
+
+        if (HasParameter("isDead"))
+        {
+            anim.SetBool("isDead", true);
+        }
+
+        if (HasParameter("Die"))
+        {
+            anim.SetTrigger("Die");
+        }
+
         col.enabled = false;
+        rb.isKinematic = true;
+
+        StartCoroutine(DeathRoutine());
+    }
+
+    private bool HasParameter(string paramName)
+    {
+        if (anim == null) return false;
+
+        foreach (AnimatorControllerParameter param in anim.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
     }
 
     // Event에서
@@ -102,5 +132,12 @@ public abstract class Boss : MonoBehaviour
             GameManager.Instance.StageClear();
         }
         Destroy(gameObject);
+    }
+
+    // Event없는 경우
+    IEnumerator DeathRoutine()
+    {
+        yield return new WaitForSeconds(3.0f);
+        DestroyBoss();
     }
 }

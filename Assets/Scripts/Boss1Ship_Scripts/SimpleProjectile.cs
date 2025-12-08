@@ -6,6 +6,7 @@ public class SimpleProjectile : MonoBehaviour
     private float _speed;
     private float _lifeTime;
     private float _elapsed;
+    public float bossBulletDamage = 0.5f;
 
     public void Init(Vector3 direction, float speed, float lifeTime)
     {
@@ -28,6 +29,12 @@ public class SimpleProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.TryGetComponent<PlayerMove>(out var player);
+            player.TakeDamage(bossBulletDamage);
+            Destroy(gameObject);
+        }
         // 충돌 처리 추가 (예: 플레이어, 지형 등)
         // 예시:
         // if (other.CompareTag("Player"))

@@ -9,6 +9,11 @@ TagManager:
   - Boss
   - DestroyZone
   - Rock
+  - Ground
+  - Monster
+  - Spike
+  - Missile
+  - Bullet_ship
   layers:
   - Default
   - TransparentFX

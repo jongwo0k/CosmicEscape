@@ -39,7 +39,8 @@ public class ThrowingRock : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player 명중");
-            // Player쪽에서 값만 받아서 데미지 처리
+            other.gameObject.TryGetComponent<PlayerMove>(out var player);
+            player.TakeDamage(rockDamage);
         }
 
         FractureRock();

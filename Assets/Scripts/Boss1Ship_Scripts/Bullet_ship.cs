@@ -2,18 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet_ship : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    public float shipDamage = 1.0f;
     public float speed;
-    // Update is called once per frame
+
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
     }
+
+    /*
+    public void OnTriggerEnter(Collider other)
+    {
+        // Bullet, Boss 자신 등과는 충돌X -> Layer or Tag
+        if (other.CompareTag("Bullet_ship"))
+        {
+            return;
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.TryGetComponent<PlayerMove>(out var player);
+            player.TakeDamage(shipDamage);
+            Destroy(gameObject);
+        }
+    }
+    */
 }
