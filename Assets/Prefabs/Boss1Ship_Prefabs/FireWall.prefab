@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireWallDamage: 5
-  damageInterval: 0.3
+  damageInterval: 1
 --- !u!54 &7480639171553904414
 Rigidbody:
   m_ObjectHideFlags: 0
