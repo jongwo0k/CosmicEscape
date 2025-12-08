@@ -6,7 +6,7 @@ public class MenuController : MonoBehaviour
 {
 
     private StartButtonEffect startButtonEffect; //버튼 이펙트 오브젝트 참조
-    public float delayBeforeLoad = 0.5f;
+    public float delayBeforeLoad = 0.15f;
     public void OnClickStart()
     {
         if (startButtonEffect != null)
