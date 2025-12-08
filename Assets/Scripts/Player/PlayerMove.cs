@@ -207,6 +207,7 @@ public class PlayerMove : MonoBehaviour
             PlayerHP += 10;
         else
             PlayerHP = 20;
+        HPSlider.value = PlayerHP / Player_MaxHP;
         Time.timeScale = 1;
         ReinforceScreen.SetActive(false);
         StartCoroutine(ReinforceTimer());
@@ -289,6 +290,11 @@ public class PlayerMove : MonoBehaviour
         {
             TakeDamage(2);
             Debug.Log(PlayerHP);
+        }
+        else if(other.gameObject.tag == "DeadZone")
+        {
+            PlayerHP = 0;
+            Debug.Log("Ãß¶ô");
         }
     }
 }
