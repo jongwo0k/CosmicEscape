@@ -29,9 +29,9 @@
 
 | Action | Key | Description |
 | :--- | :--- | :--- |
-| **Move** | `←` `→` | 좌우 이동 |
+| **Move** | `(A)←` `→(D)` | 좌우 이동 |
 | **Jump** | `SPACE` | 점프 |
-| **Dash** | `Left Shift`(only A,D) | 빠른 이동(회피기) |
+| **Dash** | `Left Shift(only with A,D)` | 빠른 이동(회피기) |
 | **Attack** | `V` | 자동 공격 ON/OFF Toggle |
 | **Target** | `1` ~ `4` | 타겟 변경 (Stage 2 전용) |
 
